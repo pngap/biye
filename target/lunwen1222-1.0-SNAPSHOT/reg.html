@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" , initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <title>完善信息</title>
+</head>
+<body style=" background: #ecf0f3">
+<div id="app" style="width: 500px;height: 500px;margin: auto;margin-top: 50px">
+    <fieldset style="text-align: center;border: none">注册信息</fieldset>
+<el-form ref="form" :model="this.form" label-width="80px">
+    <el-form-item label="姓名">
+        <el-input v-model="name"></el-input>
+    </el-form-item>
+    <el-form-item label="学号">
+        <el-input v-model="xuehao"></el-input>
+    </el-form-item>
+    <el-form-item label="学院">
+    <el-select v-model="value" placeholder="请选择" >
+        <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+        </el-option>
+    </el-select>
+    </el-form-item>
+    <el-form-item label="年级">
+        <el-select v-model="nianji" placeholder="请选择">
+            <el-option
+                    v-for="item in options1"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </el-form-item>
+    <el-form-item label="班级">
+        <el-input v-model="banji" placeholder="输入已有班级"></el-input>
+    </el-form-item>
+    <el-form-item label="专业">
+        <el-input v-model="zhuanye"></el-input>
+    </el-form-item>
+
+    <el-form-item>
+        <el-button type="primary" @click="submitForm">立即创建</el-button>
+        <el-button ><a href="http://localhost:8080/lunwen/" style="text-decoration:none;">取消</a></el-button>
+    </el-form-item>
+</el-form>
+</div>
+</body>
+<script src="js/script.js"></script>
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.1/qs.js"></script>
+<!--<script>-->
+<!--    let _this=this-->
+<!--    var username= location.search.replace(/[^\d]/g, "")-->
+<!--    var pwd= location.search.replace(/[^\d]/g, "")-->
+<!--    console.log(username+pwd)-->
+<!--</script>-->
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                username:"",
+                xuehao: '',
+                    name: '',
+                   zhuanye: '',
+                    nianji:'',
+                banji:'',
+                    pwd:"",
+                value: '',
+                options1: [{
+                    value: '2015',
+                    label: '2015'
+                }, {
+                    value: '2016',
+                    label: '2016'
+                }, {
+                    value: '2017',
+                    label: '2017'
+
+                }],
+                options: [{
+                    value: '计算机学院',
+                    label: '计算机学院'
+                }, {
+                    value: '会计学院',
+                    label: '会计学院'
+                }, {
+                    value: '外国语学院',
+                    label: '外国语学院'
+
+                }],
+
+            }
+            },
+     methods: {
+         // change(){
+         //     console.log(value)
+         // }
+         submitForm(){
+             var _this=this
+             axios({
+                 method: "post",
+                 url: "http://localhost:8080/lunwen/reg1",
+                 changeOrigin:true,
+                 data: {
+                   username:this.username,
+                     number:this.xuehao,
+                     name:this.name,
+                     xueyan:this.value,
+                     zhany:this.zhuanye,
+                     nianji:this.nianji,
+                     banji:this.banji,
+                     pwd:this.pwd
+
+                 },
+                 paramsSerializer: function (data) {
+                     return qs.stringify(data, { arrayFormat: 'repeat' })
+                 }
+             }).then(function (req) {
+                 console.log(req.data)
+                      if(req.data==true){
+                               alert("添加成功")
+                          window.location.href="http://localhost:8080/lunwen/"
+                      }else
+                      {
+                          alert("注册失败")
+                      }
+             })
+
+             }
+
+
+     },
+        created() {
+            var url = window.location.search;
+            let _this=this
+            let returl = new Object();
+            if (url.indexOf("?") != -1) {
+                let queryString = url.substr(1);
+                let queryParams = queryString.split("&");
+                for (let i = 0; i < queryParams.length; i++) {
+                    let [key, value] = queryParams[i].split("=");
+                    returl [key] = decodeURI(value);
+                    //值需要使用 decodeURI() 函数对通过 escape() 或 url 编码过的字符串进行解码
+                }}
+           this.username= returl["username"]
+            this.pwd=returl["pwd"]
+            console.log(returl)
+            console.log( this.username)
+            console.log(this.pwd)
+            // returl
+        }
+
+
+    })
+
+</script>
+</html>

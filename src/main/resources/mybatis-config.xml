@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="druid.properties"></properties>
+    <typeAliases>
+        <package name="java"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="com.liu.factory.MyDruidDataSourceFactory">
+                <!-- 数据库链接信息 -->
+                <property name="driverClass" value="${driverClassName}"/>
+                <property name="jdbcUrl" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--  加载sql映射      -->
+
+        <mapper resource="mapper/StuMapper.xml"></mapper>
+        <mapper resource="mapper/perperMapper.xml"></mapper>
+        <mapper resource="mapper/loginMapper.xml"></mapper>
+        <mapper resource="mapper/regMapper.xml"></mapper>
+    </mappers>
+</configuration>

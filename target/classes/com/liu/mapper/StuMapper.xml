@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.StuMapper">
+    <!--    名称空间-->
+    <select id="stuselectall" resultType="com.liu.pojo.Stu">
+        select *
+        from stu,class
+where classroom=banji;
+    </select>
+    <select id="stuselectone" resultType="com.liu.pojo.Stu">
+        select *
+        from stu,class
+        where number = #{number} and classroom=banji;
+
+    </select>
+    <select id="stuselectone1" resultType="com.liu.pojo.Stu">
+        select *
+        from stu,class
+        where name = #{name} and classroom=banji;
+
+    </select>
+<update id="updatastu1">
+    update stu
+    set name=#{name},xueyan=#{xueyan},zhany=#{zhany},nianji=#{nianji},banji=#{banji}
+    where  number=#{number}
+</update>
+    <select id="name" resultType="com.liu.pojo.Stu">
+        select *
+        from stu,class
+        where number = #{number} and classroom=banji;
+
+    </select>
+    <update id="updatestupwd">
+        update stu
+        set pwd=#{pwd}
+        where  number=#{number}
+    </update>
+</mapper>

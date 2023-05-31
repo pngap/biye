@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.perperMapper">
+    <!--    名称空间-->
+<insert id="insertall" >
+insert  into paperquestion(papernumber,questionNumber,questionstyke
+    ,questionneirong,xuanxianga,xuanxiangb,xuanxiangc,xuanxiangd,xuanxiange,anwer,fenshu)
+    values(#{idnumber},#{id},#{style},#{text},#{selecta,jdbcType=VARCHAR},#{selectb,jdbcType=VARCHAR},#{selectc,jdbcType=VARCHAR},#{selectd,jdbcType=VARCHAR},#{selecte,jdbcType=VARCHAR},#{anwer,jdbcType=VARCHAR},#{score})
+</insert>
+    <insert id="insetpaper" >
+        insert  into testpaper(name,number,stylea)
+        values(#{name},#{number},#{stylea})
+    </insert>
+    <update id="update">
+        update testpaper
+set  name=#{name},stylea=#{stylea}
+where number=#{number}
+    </update>
+    <select id="pigaiall" resultType="com.liu.pojo.pigai">
+        SELECT * from stupaper,testpaper,class
+        WHERE  paperid=testpaper.number and questionid=1 and classa=classroom
+    </select>
+    <select id="pigaiter" resultType="com.liu.pojo.pigai">
+        SELECT * from stupaper,testpaper,class
+        WHERE  paperid=testpaper.number and questionid=1 and classa=#{classa} and  classa=classroom
+    </select>
+    <select id="pigaixx" resultType="com.liu.pojo.pigaixxa">
+        SELECT *
+        FROM stupaper
+                 INNER JOIN  paperquestion
+        WHERE stuid=#{stuid} AND paperid=#{paperid} and paperid=papernumber and questionid=questionNumber
+    </select>
+    <select id="testpapernumber" resultType="com.liu.pojo.testpaper">
+        SELECT * from testpaper
+        WHERE  number=#{number}
+    </select>
+</mapper>

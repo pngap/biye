@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.loginMapper">
+    <!--    名称空间-->
+<select id="loginadmin" resultType="com.liu.pojo.admin">
+select * from admin
+where admin=#{admin} and pwd=#{pwd}
+
+</select>
+    <select id="loginstu" resultType="com.liu.pojo.Stu">
+        select * from stu
+        where username=#{username} and pwd=#{pwd}
+
+
+    </select>
+    <select id="loginter" resultType="com.liu.pojo.ter">
+        select * from ter
+        where username=#{username} and pwd=#{pwd}
+
+
+    </select>
+<!--    //修改密码-->
+    <update id="updatestu">
+        update stu
+        set pwd=#{pwd}
+where  username=#{username}
+
+
+    </update>
+    <update id="updateter">
+        update ter
+        set pwd=#{pwd}
+        where  username=#{username}
+    </update>
+    <update id="updateadmin">
+        update admin
+        set pwd=#{pwd}
+        where  admin=#{admin}
+    </update>
+</mapper>

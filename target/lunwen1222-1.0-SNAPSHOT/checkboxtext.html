@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>Title</title>
+    <!-- 引入样式 -->
+
+</head>
+<body style="overflow: auto;scroll-behavior: auto;height: 500px">
+
+<div id="app" style="overflow: auto;width: 100%;height: 100%;">
+    <el-tag >离开前请保存表单</el-tag><br>
+<!--    <el-row>-->
+<!--        <el-button>单选题</el-button>-->
+<!--        <el-button>多选题</el-button>-->
+<!--        <el-button>填空题</el-button>-->
+<!--        <el-button>判断题</el-button>-->
+<!--    </el-row>-->
+    <span  >{{time}}</span>
+    <div>
+        <div v-for="(item, index) in List" :key="index">
+            <el-form ref="form" label-width="80px">
+                <el-form-item label="题目类型">
+                    <el-select
+                            v-model="item.platform[index]"
+                            :key="index"
+                            placeholder="请选择题目类型"
+                            @change="change1(index,item.platform[index])"
+                    >
+                        <el-option
+                                :label="item2.platformName"
+                                v-for="(item2, index2) in platformNameList"
+                                :key="index2"
+                                :value="item2.platformValue"
+
+                        >
+
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+<!--                单选题valuea[index]=='1'-->
+                <div v-if=" valuea[index]=='1'" class="VSTD_box_item_select">
+                    <el-form-item label="">
+                        <el-tag v-model="item.platformId=index+1">题目编号:{{index+1}}</el-tag>
+                </el-form-item>
+                    <el-form-item label="">
+<!--                        @change="test(index,item.stContent[index]-->
+                        标题内容 <el-input v-model="item.stContent[index]" placeholder="请输入内容" ></el-input>
+                        A: <el-input v-model="item.stSelecta[index]" placeholder="请输入内容" ></el-input>
+                       B: <el-input v-model="item.stSelectb[index]" placeholder="请输入内容" ></el-input>
+                        C: <el-input v-model="item.stSelectc[index]" placeholder="请输入内容" ></el-input>
+                       D:<el-input v-model="item.stSelectd[index]" placeholder="请输入内容" ></el-input>
+                        分数:<el-input v-model="item.score[index]" placeholder="请输入内容" ></el-input>
+                        答案:<el-input v-model="item.anwer[index]" placeholder="请输入内容" ></el-input>
+                    </el-form-item>
+                </div>
+                <!--                多选题valuea[index]=='2'-->
+                <div v-if=" valuea[index]=='2'" class="VSTD_box_item_select">
+                    <el-form-item label=""   >
+                    <el-tag v-model="item.platformId=index+1">题目编号:{{index+1}}</el-tag>
+                    </el-form-item>
+                    <el-form-item label="">
+                        <!--                        @change="test(index,item.stContent[index]-->
+                        标题内容 <el-input  v-model="item.stContent[index]" placeholder="请输入内容" ></el-input>
+                        A: <el-input v-model="item.stSelecta[index]" placeholder="请输入内容" ></el-input>
+                        B: <el-input v-model="item.stSelectb[index]" placeholder="请输入内容" ></el-input>
+                        C: <el-input v-model="item.stSelectc[index]" placeholder="请输入内容" ></el-input>
+                        D:<el-input v-model="item.stSelectd[index]" placeholder="请输入内容" ></el-input>
+                        E:<el-input v-model="item.stSelecte[index]" placeholder="请输入内容" ></el-input>
+                        分数:<el-input v-model="item.score[index]" placeholder="请输入内容" ></el-input>
+                        答案:<el-input v-model="item.anwer[index]" placeholder="请输入内容" ></el-input>
+                    </el-form-item>
+                </div>
+                <!--                简答题valuea[index]=='3'-->
+                <div v-if=" valuea[index]=='3'" class="VSTD_box_item_select">
+                    <el-form-item label="">
+                        <el-tag v-model="item.platformId=index+1">题目编号:{{index+1}}</el-tag>
+                    </el-form-item>
+                    <el-form-item label="">
+                        <!--                        @change="test(index,item.stContent[index]-->
+                        标题内容 <el-input type="text" v-model="item.stContent[index]" placeholder="请输入内容" ></el-input>
+                        分数:<el-input v-model="item.score[index]" placeholder="请输入内容" ></el-input>
+                    </el-form-item>
+                </div>
+                <!--                多选题valuea[index]=='4'-->
+                <div v-if=" valuea[index]=='4'" class="VSTD_box_item_select">
+                    <el-form-item label="">
+                        <el-tag v-model="item.platformId=index+1">题目编号:{{index+1}}</el-tag>
+                    </el-form-item>
+                    <el-form-item label="">
+                        <!--                        @change="test(index,item.stContent[index]-->
+                        标题内容 <el-input v-model="item.stContent[index]" placeholder="请输入内容" ></el-input>
+                        对: <el-input v-model="item.stSelecta[index]" placeholder="输入内容"></el-input>
+                        错: <el-input v-model="item.stSelectb[index]" placeholder="输入内容"></el-input>
+                        分数:<el-input v-model="item.score[index]" placeholder="请输入内容" ></el-input>
+                        答案:<el-input v-model="item.anwer[index]" placeholder="请输入内容" ></el-input>
+                    </el-form-item>
+                </div>
+
+
+                <el-button type="primary" @click="delForm(index)">删除表单</el-button>
+            </el-form>
+        </div>
+    </div>
+    <div style="margin: 10px 0">
+        <el-button type="primary" @click="addForm">添加</el-button>
+        <el-button type="primary" @click="submit1">提交</el-button>
+
+    </div>
+</div>
+
+
+</body>
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.1/qs.js"></script>
+<script type="module">
+
+
+    new Vue( {
+        el:"#app",
+        data() {
+            return {
+
+                time:"",
+
+
+                //获取每一个的联动
+
+              valuea:[],
+                //答案类型
+                ruleForm:{
+                    resource:[]
+                },
+                title: "巡查内容页",
+                dui:"对",
+                cuo:"错",
+                //创建表单的数据
+                personObj: {
+                    platform: [],
+                    platformId: [],
+                    stContent:[],
+                    stSelecta:[],
+                    stSelectb:[],
+                    stSelectc:[],
+                    stSelectd:[],
+                    stSelecte:[],
+                    score:[],
+                    anwer:[]
+                },
+                //选项数据
+                platformNameList: [
+                    {
+                        platformName: "单选题",
+                        platformValue: "1",
+                    },
+                    {
+                        platformName: "多选题",
+                        platformValue: "2",
+                    },
+                    {
+                        platformName: "简答题",
+                        platformValue: "3",
+                    },
+                    {
+                        platformName: "判断题",
+                        platformValue: "4",
+                    },
+                ],
+                //from表单绑定的数据，与压入数据要相同
+                List: [
+                    {
+                        platform: [],
+                        platformId: [],
+                        stContent:[],
+                        stSelecta:[],
+                        stSelectb:[],
+                        stSelectc:[],
+                        stSelectd:[],
+                        stSelecte:[],
+                        score:[],
+                        anwer:[]//题目内容
+                    },
+                ],
+            };
+        },
+        methods: {
+            change1(index,value){
+                var _this=this
+                console.log(value)
+                this.valuea[index]=value
+
+
+            },pops(index,value){
+
+
+
+            },
+            // test(index,value){
+            //     console.log(index)
+            //     console.log(value)
+            //
+            // },
+            text(index,value){
+                console.log(value)
+            },
+            //深拷贝
+            cloneObj(obj) {
+                let ret;
+                if (Array.isArray(obj)) {
+                    //创建一个空数组
+                    ret = [];
+                    for (let i = 0; i < obj.length; i++) {
+
+                        ret[i] = this.cloneObj(obj[i])
+                    }
+                    return ret;
+                } else if (Object.prototype.toString.call(obj) === "[object Object]") {
+                    ret = {};
+                    for (let i in obj) {
+                        ret[i] = this.cloneObj(obj[i])
+                    }
+                    return ret;
+                } else {
+                    return obj;
+                }
+            },
+            //添加表单
+            addForm() {
+                let arr = this.cloneObj(this.personObj);
+                console.log("arr", arr);
+                this.List.push(arr);
+            },
+            delForm(index){
+                 console.log(index)
+              console.log(this.List.length)
+
+                if(this.List.length==1){
+                    this.$message.error("无法继续删除")
+                }
+                else {
+
+                    this.List= this.List.filter((item)=>{
+                        return item.platformId!=index+1
+                    })
+                    this.$message("删除成功")
+                }
+
+
+
+
+            }
+                ,
+            //提交表单
+            submit() {
+                var _this=this
+                var arr=[]
+                let qs = Qs;
+                    for (var i=0;i<this.List.length;i++){
+                         var json={}
+                        json.id=i+1
+                        json.idnumber=this.time
+                        json.text=this.List[i].stContent.join("")
+                        json.selecta=this.List[i].stSelecta.join("")
+                        json.selectb=this.List[i].stSelectb.join("")
+                        json.selectc=this.List[i].stSelectc.join("")
+                        json.selectd=this.List[i].stSelectd.join("")
+                        json.selecte=this.List[i].stSelecte.join("")
+                        json.score=this.List[i].score.join("")
+                        json.anwer=this.List[i].anwer.join("")
+
+
+                        json.style=this.valuea[i]
+                        console.log(this.List)
+                        arr.push(json)
+                    //     console.log("this.List", this.List[i].stContent.toString());
+                    }
+               axios({
+                    method: "post",
+                    url: "http://localhost:8080/lunwen/quick1",
+                    changeOrigin:true,
+                    data: {
+                        number: [arr],
+                    },
+                   paramsSerializer: function (data) {
+                       return qs.stringify(data, { arrayFormat: 'repeat' })
+                   }
+                }).then(function (req) {
+
+                })
+                console.log(arr)
+            },
+            submit1() {
+                var arr=[]
+                let qs = Qs;
+                for (var i=0;i<this.List.length;i++){
+                    var json={}
+                    json.id=i+1
+
+                    json.idnumber=this.time
+                    json.text=this.List[i].stContent.join("")
+                    json.selecta=this.List[i].stSelecta.join("")
+                    json.selectb=this.List[i].stSelectb.join("")
+                    json.selectc=this.List[i].stSelectc.join("")
+                    json.selectd=this.List[i].stSelectd.join("")
+                    json.selecte=this.List[i].stSelecte.join("")
+                    json.score=this.List[i].score.join("")
+                    json.anwer=this.List[i].anwer.join("")
+
+
+                    json.style=this.valuea[i]
+                    console.log(this.List)
+                    arr.push(json)
+                    //     console.log("this.List", this.List[i].stContent.toString());
+                }
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/lunwen/quick1",
+                    changeOrigin:true,
+                    data: {
+                        number:[arr],
+                    },
+                    paramsSerializer: function (data) {
+                        return qs.stringify(data, { arrayFormat: 'repeat' })
+                    }
+                }).then(function (req) {
+
+                })
+                console.log(arr)
+                    window.location.assign('http://localhost:8080/lunwen/html/kaoshibianji.html')
+            },
+            // 获取当前日期的方法
+            getProjectNum () {
+                const projectTime = new Date() // 当前中国标准时间
+                const Year = projectTime.getFullYear() // 获取当前年份 支持IE和火狐浏览器.
+                const Month = projectTime.getMonth() + 1 // 获取中国区月份
+                const Day = projectTime.getDate() // 获取几号
+                var CurrentDate = String(Year)
+                if (Month >= 10) { // 判断月份和几号是否大于10或者小于10
+                    CurrentDate += Month
+                } else {
+                    CurrentDate += '0' + Month
+                }
+                if (Day >= 10) {
+                    CurrentDate += Day
+                } else {
+                    CurrentDate += '0' + Day
+                }
+
+                return CurrentDate
+            }
+        },
+        created () {
+            // 调用获取当前日期的方法加四位随机数  赋值表单中的项目编号
+
+            this.time = this.getProjectNum()+Math.floor(Math.random() * 10000)   // 如果是6位或者8位随机数，相应的 *1000000或者 *100000000就行了
+     console.log(this.time)
+        },
+        mounted() {
+         window.addEventListener("beforeunload",function (e){
+             if(this.List.length!=0){
+             e.preventDefault()
+              e.returnValue="q"}
+         })
+        }
+
+    });
+
+
+</script>
+</html>

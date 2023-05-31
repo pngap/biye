@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>反馈信息</title>
+    <style type="text/css">
+        #a1 {
+            width: 30%;
+            height: 90px;
+            float: left;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+        #a2 {
+            width: 55%;
+            height: 40px;
+            float: left;
+            text-align: right;
+            padding-top: 35px;
+            z-index: 1;
+        }
+
+        #t1 {
+            width: 100%;
+            height: 500px;
+        }
+
+        #table {
+            width: 100%;
+            text-align: center;
+            border-color: #6495ED;
+            border: 0px solid #6495ED;
+        }
+
+        .table {
+            width: 80%;
+            float: left;
+            height: 400px;
+        }
+
+        #addinfo {
+            width: 400px;
+            height: 400px;
+            text-align: left;
+            float: left;
+            box-shadow: 0px 0px 35px 0px #6495ED;
+            z-index: 3;
+            background-color: white;
+            position: absolute;
+            left: 25%;
+            top: 18%;
+            border-radius: 27px 0px 27px 27px;
+        }
+
+        th {
+            border: 1px solid ghostwhite;
+        }
+
+        th {
+            height: 40px;
+            background-color: #6495ED;
+        }
+
+        td {
+            border: 1px solid floralwhite;
+            height: 30px;
+        }
+
+        tr:hover {
+            background-color: #999999;
+            height: 37px;
+        }
+
+        #td {
+            border: 3px solid #000000;
+            width: 60px;
+            height: 40px;
+            background-color: #6495ED;
+        }
+
+        #add {
+            width: 140px;
+            height: 40px;
+            text-decoration: none;
+            background-color: #6495ED;
+            border: 3px solid #000000;
+            color: #F0F8FF;
+            padding: 10px 10px 10px 10px;
+            margin-right: 10%;
+            border-radius: 6px 6px 6px 6px;
+        }
+
+        #add:hover {
+            color: #000000;
+        }
+
+        select {
+            height: 40px;
+            border: 2px solid #000000;
+            border-radius: 3px 3px 3px 3px;
+            margin-right: 40px;
+            margin-left: 20px;
+        }
+
+        .a10 .ss1 {
+            height: 40px;
+            border: 2px solid #000000;
+            border-radius: 3px 3px 3px 3px;
+            width: 80px;
+            margin-right: 40px;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        #form1 {
+            font-size: larger;
+            padding-left: 20px;
+            text-align: center;
+        }
+
+        input {
+            width: 65%;
+            height: 25px;
+            border-radius: 6px 6px 6px 6px;
+            margin-top: 10px;
+        }
+
+        #btn_update, #btn_ext, #btn_add {
+            width: 120px;
+            height: 40px;
+            border-radius: 6px 6px 6px 6px;
+            margin: 0 auto;
+            background-color: #6495ED;
+        }
+
+        #btn_add {
+            color: white;
+        }
+
+        #btn_ext {
+            color: white;
+        }
+
+        #btn_add :hover {
+            color: #999999;
+        }
+
+        #btn_ext :hover {
+            color: antiquewhite;
+        }
+
+        #xiu {
+            border-radius: 3px 3px 3px 3px;
+            border: 1px solid bisque;
+            padding: 5px;
+            box-shadow: 0px 0px 30px 0px #DCDCDC;
+            background-color: coral;
+        }
+
+        #xiu:hover {
+            color: #BD0A01;
+        }
+
+        #xiu2 {
+            border-radius: 3px 3px 3px 3px;
+            border: 1px solid bisque;
+            padding: 5px;
+            box-shadow: 0px 0px 30px 0px #DCDCDC;
+            background-color: springgreen;
+        }
+
+        #xiu2:hover {
+            color: #BD0A01;
+        }
+
+        #h4 {
+            width: 94%;
+            float: left;
+            padding-top: 15px;
+            font-size: larger;
+            height: 30px;
+            padding-left: 0px;
+            border-radius: 0px 0px 50% 50%/0px 0px 40px 40px;
+            background-color: #6495ED;
+        }
+
+
+        #h3 {
+            width: 5%;
+            float: right;
+            height: 20px;
+            padding: 0;
+            text-align: right;
+            margin: 0 auto;
+        }
+
+        /* #h2{width: 100%;float: left;height: 40px;border-radius: 0px 0px 50% 50%/0px 0px 30px 30px;background-color: #6495ED;} */
+        #span1 {
+            width: 20px;
+            font-size: x-large;
+            line-height: 10px;
+        }
+
+        #h3 :hover {
+            background-color: #DCDCDC;
+        }
+
+        #aa2 {
+            float: left;
+            width: 15%;
+        }
+
+        #aa3 {
+            width: 80%;
+            height: 320px;
+            float: left;
+        }
+
+        #shu {
+            height: 320px;
+        }
+
+        .a10 .a9 {
+            width: 70px;
+            height: 20px;
+            background-color: #fff;
+            position: absolute;
+            left: 200px;
+            bottom: 0px;
+        }
+
+        .a10 {
+            width: 100%;
+            height: 50px;
+            margin-top: 0px;
+            background-color: #dcdcdc;
+            float: left;
+            font-size: larger;
+            padding-left: 20px;
+        }
+
+        .dao {
+            border-radius: 3px 3px 3px 3px;
+            box-shadow: 0px 0px 30px 0px #DCDCDC;
+            background: white;
+            width: 70px;
+            height: 40px;
+            float: left;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="a1">
+    <h2><font style="color: #6495ED;">~~消息信息~~</font></h2>
+</div>
+<div id="a3">
+
+</div>
+<div id="text">
+    <div id="a2">
+        <input id="value"> </input>
+        <a  type="button"  href="#"  @click="select()" id="add">查找</a>
+    </div>
+    <div class="table" style="overflow:auto" >
+        <table border="1" style="text-align:center" id="table" cellspacing="0">
+            <tr>
+
+
+                <th>发送人编号</th>
+                <th>消息编号</th>
+                <th>时间</th>
+                <th>内容</th>
+                <th>操作</th>
+            </tr>
+
+            <tr v-for=" (message,index) in message"  >
+                <td>{{message.fasongnumber}}</td>
+                <td>{{message.number}}</td>
+                <td>{{message.timea}}</td>
+                <td>{{message.neirong}}</td>
+                <td><a style="color:#6495ED;cursor: pointer;" @click="updata(index)" id="xiu">详情</a>&nbsp
+                    <a style="color:chocolate;cursor:pointer;" @click="del(index);" id="xiu2">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="addinfo" style="display: none;" title="点击鼠标以固定，滑动鼠标拖动">
+        <!-- <div id="aa2">
+    <img src="img/书本.jpg" align="right" height="400px" id="shu">
+    </div> -->
+        <!-- <div id="aa3"> -->
+        <form action="" method="" id="form1">
+            <center>
+                <div id="h4"> <b>~~请添加信息~~</b></div></center><div id="h3">
+            <span style=" color: black;cursor:pointer;" @click="hideAddInput()" id="span1">×</span>
+        </div> <br>
+           <div> <p style="font-size: small;float: left">发送人编号:</p><input type="text" v-model="fasongnumber" id="fasongnumber" placeholder="请输入编号" disabled/>
+    </div><br>
+            <div> <p style="font-size: small;float: left">消息编号:</p><input type="text" v-model="number" id="number" placeholder="请输入编号" disabled/>
+            </div><br><!--限制用户名只能用英文 下划线 或数字-->
+            <div>   <p style="font-size: small;float: left">时间:</p><input type="text" v-model="timea" id="timea" placeholder="请输入编号" disabled/>
+    </div><br>
+            <div> <p style="font-size: small;float: left">内容:</p><input  type="text" style="height:51px;width:350px;font-size:12px;"v-model="neirong" id="neirong" placeholder="请输入编号" disabled/>
+</div>  <br>
+            <br><hr width="90%" size="2" color="white">
+                <!--                <input type="button" value="提交" onclick="updateInfo()" style="display:none" id="btn_update">-->
+                <!-- <input type="button" value="取消" onclick="hideAddInput()" id="btn_ext"> -->
+        </form>
+        <!-- </div> -->
+    </div>
+</div>
+<!-- <div class="a10">
+    <div class="dao"><span><b>共12页</b></span></div>
+    <div class="dao">
+    <select name="" class="ss1">
+        <option value=""><b>9条/页</b></option>
+    </select></div>
+    <span>❮</span> 1  2 <span id="">❯</span>
+</div> -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--<script type="module" src="js/main.js"></script>-->
+<script type="module">
+    console.log("aaa")
+    new Vue({
+        el:"#text",
+        data(){
+            return{
+                //  textname:""
+                message:[],
+                fasongnumber:"",
+                number:"",
+                timea:"",
+                neirong:""
+            }},
+        methods:{
+            updata(index){
+                var _this=this
+                document.getElementById('addinfo').style="display:block-inline" ;
+                // console.log(this.stu[index].number)
+              this.fasongnumber=this.message[index].fasongnumber
+                this. number=this.message[index].number
+                this.timea=this.message[index].timea
+                this.neirong=this.message[index].neirong
+            },
+            hideAddInput(){
+                document.getElementById('addinfo').style="display:none" ;
+
+            },
+            del(index){
+                var _this=this
+                console.log("aabb")
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/lunwen/del/delmessage",
+                    changeOrigin:true,
+                    data: {
+                        number:this.message[index].number
+                    },
+                    paramsSerializer: function (data) {
+                        return qs.stringify(data, { arrayFormat: 'repeat' })
+                    }
+                }).then(function (req) {
+                    console.log(req.data)
+                    if(req.data==true){
+                        alert("删除成功")
+                        location.reload()
+                    }else
+                    {
+                        alert("修改失败")
+                    }
+                })
+            }
+            ,
+            addInfo(){
+                var _this=this
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/lunwen/updata1/updatater",
+                    changeOrigin:true,
+                    data: {
+                        number:this.xuehao,
+                        name:this.name,
+                        nianling:this.nianling,
+                        bianjibum:this.bianjibum,
+                        xingbei:this.xingbei
+
+                    },
+                    paramsSerializer: function (data) {
+                        return qs.stringify(data, { arrayFormat: 'repeat' })
+                    }
+                }).then(function (req) {
+                    console.log(req.data)
+                    if(req.data==true){
+                        alert("修改成功")
+                        location.reload()
+                    }else
+                    {
+                        alert("修改失败")
+                    }
+                })
+            },
+
+            select()
+            {
+                var _this=this;
+                var a=  document.getElementById("value").value;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/lunwen/message1/message3",
+                    changeOrigin:true,
+                    data: {
+                        number:a
+                    }
+
+                }).then(function (req) {
+
+                    _this.message = req.data
+                    console.log(req.data)
+
+                }).catch(err=>{
+                    if(req.data==0) {
+                        console.log("err")
+                    }
+                })
+
+
+            }
+        }
+        ,
+        mounted() {
+            var _this=this;
+
+            axios({
+                method: "get",
+                url: "http://localhost:8080/lunwen/message1/message2",
+                changeOrigin:true,
+            }).then(function (req) {
+
+                _this.message = req.data
+                console.log(req.data)
+            }).catch(err=>{
+                if(req.data==0) {
+                    console.log("err")
+                }
+            })
+
+        }
+
+    })
+
+    // function select() {
+    //     // var a = document.getElementById("value").value;
+    //     // location.href = "demo1?number=" + a + "";
+    //
+    // //     var a=  document.getElementById("value").value;
+    // // axios({
+    // //
+    // //     method: "get"
+    //
+    // // })
+    //
+    //
+    // }
+
+</script>
+<script>
+    window.onload = function(){
+        var box = document.getElementById("addinfo");
+        var box1=document.getElementById("h4");
+        var box2=document.getElementById("aa2")
+        box1.onmousedown = function(){
+            document.onmousemove = function(event){
+                event = event || window.event;
+                var left = event.clientX;
+                var top = event.clientY;
+                box.focus();
+                box.style.left = left +"px";
+                box.style.top = top +"px";
+
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+                //        };document.onmousedown= function(){
+                //                document.onmousemove = null;
+                //                document.onmouseup = null;
+                // };
+            };
+        };
+    };
+</script>
+</body>
+</html>

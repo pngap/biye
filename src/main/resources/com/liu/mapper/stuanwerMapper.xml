@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.stuanwerMapper">
+    <!--    名称空间-->
+<insert id="insertstuanwer">
+insert into stupaper(stuid,paperid,questionid,stuanwer,classa,zhuantai)
+values (#{stuid},#{paperid},#{questionid},#{stuanwer},#{classa},#{zhuantai})
+
+</insert>
+    <insert id="insertgrade">
+        insert into grade(stuid,paperid,chengji,classa,id)
+        values (#{number},#{paperid},#{chengji},#{banji},#{name})
+
+    </insert>
+    <update id="updatazhantai">
+update  stupaper
+set zhuantai=#{zhuantai}
+where paperid=#{paperid} and stuid=#{stuid} and questionid=1
+    </update>
+</mapper>

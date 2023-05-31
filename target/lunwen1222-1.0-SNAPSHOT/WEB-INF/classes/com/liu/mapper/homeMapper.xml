@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.homeMapper">
+    <!--    名称空间-->
+    <select id="stuhome" resultType="java.lang.Integer">
+        SELECT  COUNT(*) from stu
+    </select>
+    <select id="banjihome" resultType="java.lang.Integer">
+        SELECT  COUNT(*) from class
+    </select>
+    <select id="gradepasshome" resultType="java.lang.Integer">
+        SELECT  COUNT(*) from grade
+    </select>
+    <select id="gradefailhome" resultType="java.lang.Integer">
+        SELECT COUNT(*) from grade where chengji>3
+    </select>
+</mapper>

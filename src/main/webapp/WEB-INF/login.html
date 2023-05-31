@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" , initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="../lunwen/css/style.css">
+
+    <title>登录</title>
+</head>
+<body>
+
+<!-- 第一个状态直接登录，第二个状态注册-->
+<!-- 页面布局 -->
+
+<!-- 主体容器 -->
+<!--<div id="app">-->
+<div class="container" >
+    <!-- 两个单页面 字和按钮 -->
+<!--    <div id="app">-->
+    <div class="switch-panel">  <!-- 此处需改变 -->
+        <!-- 登录 -->
+        <div id="login" class="switch-box switch-hidden">
+            <div class="title">欢迎加入!</div>
+
+            <button id="switch1">返回</button>
+        </div>
+
+        <!-- 注册 -->
+        <div id="register" class="switch-box">  <!-- 此处需改变 -->
+            <div class="title">没有账号？</div>
+            <p>创建你的账号</p>
+            <button id="switch2">创建</button>
+        </div>
+    </div>
+
+    <!-- section标签用于对页面内容分块 注册登录板块 -->
+    <section class="register-login-panel">    <!-- 此处section需改变 -->
+        <!-- 注册界面 -->
+        <section class="register switch-hidden-2">
+            <div class="content">
+                <h2>创建你的账号</h2>
+                <div id="app" style="margin-left: 50px">
+                <input class="b" v-model="input3" type="text" placeholder="账号">
+                <input class="b" v-model="input4" type="password" placeholder="密码">
+                    <input class="b" v-model="input5" type=password placeholder="再次输入密码">
+                <button style="margin-left: 50px" @click="reg()">创建</button>
+            </div>
+            </div>
+
+
+        </section>
+
+        <!-- 登录界面 -->
+        <section class="login">    <!-- 此处section需改变 -->
+
+            <div class="content">
+                <h2>登录账号</h2>
+
+                <div class="radioc">
+                    <div id="app1">
+                    <el-radio-group v-model="radio" @change="change()">
+                        <el-radio :label="3" >老师</el-radio>
+                        <el-radio :label="6">学生</el-radio>
+                        <el-radio :label="9">管理员</el-radio>
+                    </el-radio-group>
+
+                <input class="b"
+                        placeholder="账号"
+                        v-model="input1"
+                        >
+                </input>
+
+                <input
+                        class="b"
+                        placeholder="密码"
+                        v-model="input2"
+                        >
+                </input>
+                        <span>忘记密码？请联系管理员</span><br>
+                        <button @click="login()">登录</button>
+                </div>
+
+                </div>
+
+                </div>
+
+
+
+        </section>
+    </section>
+</div>
+<!--</div>-->
+<!--</div>-->
+</body>
+
+<script src="../lunwen/js/script.js"></script>
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.1/qs.js"></script>
+<script type="module">
+new Vue({
+    el:"#app",
+    data(){
+        return{
+
+            input3:'',
+            input4:'',
+            input5:""
+
+        }
+    },methods:{
+
+
+        reg(){
+            let _this=this
+            console.log(this.input3)
+            console.log(this.input5)
+            if(this.input3==''||this.input4==''||this.input5==''){
+                this.$message("不能为空"
+                )
+
+            }else {
+                if(this.input4==this.input5){
+
+                    window.location.href="http://localhost:8080/lunwen/reg.html?username="+this.input3+"&pwd="+this.input5+""
+
+                }else {
+                    alert("两次密码不一致")
+                }
+            }
+
+
+        }
+
+
+    }
+
+
+})
+new Vue({
+    el:"#app1",
+    data(){
+        return{
+            radio:6,
+
+            input1:"",
+            input2:undefined,
+
+        }
+    },methods:{
+
+        change()
+        {
+            let _this=this
+            console.log(this.radio)
+
+
+        },
+
+        login(){
+            var _this=this
+            console.log(this.radio)
+
+            axios({
+                method: "post",
+                url: "http://localhost:8080/lunwen/quick2",
+                changeOrigin:true,
+                data: {
+                    admin:this.input1,
+                    pwd:this.input2,
+                    radion:this.radio
+                },
+                paramsSerializer: function (data) {
+                    return qs.stringify(data, { arrayFormat: 'repeat' })
+                }
+            }).then(function (req) {
+                console.log(req.data[0])
+                console.log(req.data[2])
+               switch (req.data[0]){
+                   case "successadmin": window.location.href="http://localhost:8080/lunwen/indexadmin.html?admin="+req.data[1]+""
+                       break;
+                   case "successstu": window.location.href="http://localhost:8080/lunwen/indexstu.html?admin="+req.data[1]+"&class="+req.data[2]+""
+                       break;
+                   case "successter": window.location.href="http://localhost:8080/lunwen/indexter.html?admin="+req.data[1]+""
+                       break;
+
+                   case "fail":alert("登录失败")
+                       break;
+               }
+
+
+            })
+
+  }
+    }
+
+
+})
+</script>
+</html>
